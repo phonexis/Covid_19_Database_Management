@@ -1,0 +1,134 @@
+Dorjee Gyaltsen
+Dennyse Cunza
+
+CSCI 435 
+Project 
+--------------------------
+index.php 
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title></title>
+</head>
+<body>
+Input data below....
+<br>
+<br>
+  <form action = "includes/signup.inc.php" method = "POST">
+
+          <input type = "text" name = "country" placeholder = "Country">
+          <br>
+          <input type = "number" name = "totalCases" placeholder = "Total Cases">
+          <br>
+          <input type = "number" name = "averageCaseDay" placeholder = "Average Cases Per Day">
+          <br>
+          <input type = "number" name = "averageCaseMonth" placeholder = "Average Cases Per Month">
+          <br>
+          <input type = "number" name = "deaths" placeholder = "Total Deaths">
+          <br>
+          <input type = "number" name = "DeathsPerDay" placeholder = "Average Deaths Per Day">
+          <br>
+          <input type = "number" name = "DeathsPerMonth" placeholder = "Avergae Deaths Per Month">
+          <br>
+          <input type = "number" name = "recovered" placeholder = "Total Recovered">
+          <br>
+          <input type = "number" name = "Tests" placeholder = "Total Tests">
+          <br>
+          <input type = "number" name = "Population" placeholder = "Population">
+          <br>
+         
+          <button type = "submit" name = "submit"> Submit </button>
+
+    </form>
+      
+
+</body>
+</html>
+
+------------------------------
+Dbh.inc.php
+
+<?php 
+
+    $dbServername = "localhost";
+    $dbUsername = "root";
+    $dbPassword = "";
+    $dbName = "Project";
+    
+    $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
+------------------------------
+Signup.inc.php
+
+<?php
+
+  	include_once 'dbh.inc.php';
+
+    $country = $_POST['country'];
+    $totalCases = $_POST['totalCases'];
+    $averageCaseDay = $_POST['averageCaseDay'];
+    $averageCaseMonth = $_POST['averageCaseMonth'];
+    $deaths = $_POST['deaths'];
+    $DeathsPerDay = $_POST['DeathsPerDay'];
+    $DeathsPerMonth = $_POST['DeathsPerMonth'];
+    $recovered = $_POST['recovered'];
+    $Tests = $_POST['Tests'];
+    $Population = $_POST['Population'];
+    
+    
+    
+    $sql = "INSERT INTO CoronaVirus (Country, TotalCases, AverageCasesPerDay, AverageCasesPerMonth, TotalDeaths, AverageDeathsPerDay, AverageDeathsPerMonth, TotalRecovered, TotalTests, Population) VALUES ('$country', '$totalCases', '$averageCaseDay', '$averageCaseMonth', '$deaths', '$DeathsPerDay', '$DeathsPerMonth', '$recovered', '$Tests', '$Population'); ";
+    
+    mysqli_query($conn, $sql);
+
+    header("Location: ../index.php?signup=success");
+
+--------------------------------------
+Databasecode.sql
+
+CREATE table CoronaVirus (Country varchar(32), TotalCases int(15), 
+	AverageCasesPerDay int(10), AverageCasesPerMonth int(10), 
+	TotalDeaths int(15), AverageDeathsPerDay int(10), 
+	AverageDeathsPerMonth int(10), TotalRecovered int(12), 
+	TotalTests int(13), Population int(20));
+
+
+
+INSERT INTO CoronaVirus (Country, TotalCases, AverageCasesPerDay, AverageCasesPerMonth, 
+	TotalDeaths, AverageDeathsPerDay, AverageDeathsPerMonth, TotalRecovered, TotalTests,
+	Population) 
+VALUES ('USA', 2596364, 40000, 120000, 128152, 512, 1540, 1078976, 31969103,
+		330986397);
+
+------------------------------------------
+
+The index.php file is used to load the data from a html website. And all this works through a server I created by xampp. Using the local host and my server I created a table for CoronaVirus and use the php file to load the data. The Databasecode.sql just shows the attributes we used to create this database. And the other files help me with the connection to my server and host for the sql and the loading of the data. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
